@@ -51,9 +51,10 @@ router.post('/add', (req, res, next) => {
      * ADD CODE HERE *
      *****************/
       let newBook = books({
-      "name": req.body.name,
-      "cost": req.body.cost,
-      "rating": req.body.rating
+      "title": req.body.title,
+      "price": req.body.price,
+      "author": req.body.author,
+      "genre":req.body.genre
     });
 
     book.create(newBook, (err, books) => {
@@ -107,9 +108,10 @@ router.post('/:id', (req, res, next) => {
 
      let updatedBook = book({
        "_id": id,
-      "name": req.body.name,
-      "cost": req.body.cost,
-      "rating": req.body.rating
+      "title": req.body.name,
+      "price": req.body.cost,
+      "author": req.body.rating,
+      "genre":req.body.genre
     });
 
     book.update({_id: id}, updatedBook, (err) => {
