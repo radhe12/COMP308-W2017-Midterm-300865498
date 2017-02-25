@@ -15,7 +15,7 @@ router.get('/', (req, res, next) => {
     }
     else {
       res.render('books/index', {
-        title: 'Books',
+        title: 'books',
         books: books
       });
     }
@@ -34,10 +34,9 @@ router.get('/add', (req, res, next) => {
       return console.error(err);
     }
     else {
-      res.render('books/index', {
-        title: 'books',
-        books: books,
-        displayName: req.user ? req.user.displayName : ''
+      res.render('books/details', {
+        title: 'Add new book'
+        
       });
     }
   });
@@ -51,10 +50,10 @@ router.post('/add', (req, res, next) => {
      * ADD CODE HERE *
      *****************/
       let newBook = books({
-      "title": req.body.title,
-      "price": req.body.price,
-      "author": req.body.author,
-      "genre":req.body.genre,
+      "Title": req.body.title,
+      "Price": req.body.price,
+      "Author": req.body.author,
+      "Genre":req.body.genre,
       
     });
 
@@ -89,7 +88,7 @@ router.get('/:id', (req, res, next) => {
           res.render('books/details', {
               title: 'book Details',
               books: books,
-              displayName: req.user ? req.user.displayName : ''
+              
           });
         }
       });
