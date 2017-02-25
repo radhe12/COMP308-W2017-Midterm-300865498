@@ -54,7 +54,8 @@ router.post('/add', (req, res, next) => {
       "title": req.body.title,
       "price": req.body.price,
       "author": req.body.author,
-      "genre":req.body.genre
+      "genre":req.body.genre,
+      
     });
 
     book.create(newBook, (err, books) => {
