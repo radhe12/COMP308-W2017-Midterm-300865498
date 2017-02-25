@@ -29,14 +29,14 @@ router.get('/add', (req, res, next) => {
     /*****************
      * ADD CODE HERE *
      *****************/
-     game.find( (err, games) => {
+     book.find( (err, books) => {
     if (err) {
       return console.error(err);
     }
     else {
-      res.render('games/index', {
-        title: 'Games',
-        games: games,
+      res.render('books/index', {
+        title: 'books',
+        books: books,
         displayName: req.user ? req.user.displayName : ''
       });
     }
@@ -56,7 +56,7 @@ router.post('/add', (req, res, next) => {
       "rating": req.body.rating
     });
 
-    game.create(newBook, (err, books) => {
+    book.create(newBook, (err, books) => {
       if(err) {
         console.log(err);
         res.end(err);
@@ -77,16 +77,16 @@ router.get('/:id', (req, res, next) => {
       // get a reference to the id from the url
       let id = mongoose.Types.ObjectId.createFromHexString(req.params.id);
 
-        // find one game by its id
-      game.findById(id, (err, games) => {
+        // find one book by its id
+      book.findById(id, (err, books) => {
         if(err) {
           console.log(err);
           res.end(error);
         } else {
-          // show the game details view
-          res.render('games/details', {
-              title: 'Game Details',
-              games: games,
+          // show the book details view
+          res.render('books/details', {
+              title: 'book Details',
+              books: books,
               displayName: req.user ? req.user.displayName : ''
           });
         }
@@ -105,20 +105,20 @@ router.post('/:id', (req, res, next) => {
      *****************/
      let id = req.params.id;
 
-     let updatedGame = game({
+     let updatedBook = book({
        "_id": id,
       "name": req.body.name,
       "cost": req.body.cost,
       "rating": req.body.rating
     });
 
-    game.update({_id: id}, updatedGame, (err) => {
+    book.update({_id: id}, updatedBook, (err) => {
       if(err) {
         console.log(err);
         res.end(err);
       } else {
-        // refresh the game List
-        res.redirect('/games');
+        // refresh the book List
+        res.redirect('/books');
       }
     });
 
@@ -132,13 +132,13 @@ router.get('/delete/:id', (req, res, next) => {
      *****************/
       let id = req.params.id;
 
-    game.remove({_id: id}, (err) => {
+    book.remove({_id: id}, (err) => {
       if(err) {
         console.log(err);
         res.end(err);
       } else {
-        // refresh the games list
-        res.redirect('/games');
+        // refresh the books list
+        res.redirect('/books');
       }
     });
 });
