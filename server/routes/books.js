@@ -104,13 +104,13 @@ router.post('/:id', (req, res, next) => {
      * ADD CODE HERE *
      *****************/
      let id = req.params.id;
-
-     let updatedBook = book({
+     let updatedBook =new book({
        "_id": id,
-      "Title": req.body.name,
-      "Price": req.body.cost,
-      "Author": req.body.rating,
-      "Genre":req.body.genre
+      "title": req.body.name,
+      "price": req.body.cost,
+      "author": req.body.rating,
+      "genre":req.body.genre,
+      "description":req.body.description
     });
 
     book.update({_id: id}, updatedBook, (err) => {
