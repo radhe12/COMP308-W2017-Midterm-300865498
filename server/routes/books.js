@@ -28,18 +28,11 @@ router.get('/add', (req, res, next) => {
 
     /*****************
      * ADD CODE HERE *
-     *****************/
-     book.find( (err, books) => {
-    if (err) {
-      return console.error(err);
-    }
-    else {
-      res.render('books/details', {
-        title: 'Add new book'
-        
-      });
-    }
-  });
+     *****************/ 
+    res.render('books/details', {
+      title: 'Add a new book',
+      books: ''
+    });  
  
 });
 
@@ -49,15 +42,16 @@ router.post('/add', (req, res, next) => {
     /*****************
      * ADD CODE HERE *
      *****************/
-      let newBook = books({
+      let newBook = book({
       "Title": req.body.title,
       "Price": req.body.price,
       "Author": req.body.author,
       "Genre":req.body.genre,
+      "Description":req.body.description
       
     });
 
-    book.create(newBook, (err, books) => {
+    book.create(newBook, (err, book) => {
       if(err) {
         console.log(err);
         res.end(err);
@@ -108,10 +102,10 @@ router.post('/:id', (req, res, next) => {
 
      let updatedBook = book({
        "_id": id,
-      "title": req.body.name,
-      "price": req.body.cost,
-      "author": req.body.rating,
-      "genre":req.body.genre
+      "Title": req.body.name,
+      "Price": req.body.cost,
+      "Author": req.body.rating,
+      "Genre":req.body.genre
     });
 
     book.update({_id: id}, updatedBook, (err) => {
